@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>paintbrush</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Outline" transform="translate(-149.000000, -450.000000)">
+            <g id="paintbrush" transform="translate(150.000000, 450.000000)">
+                <path d="M15.998,17.3887 L7.612,9.0017" id="Stroke-13" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M7.5249,17.4756 L5.6379,19.3616" id="Stroke-15" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M6.5215,14.4648 L3.7015,17.2838" id="Stroke-17" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M24.1445,0.8555 C23.5565,0.2675 21.0125,-0.1485 16.4965,4.3685 C14.6835,6.1805 13.5185,7.8245 12.8075,9.1835 C12.6515,9.4795 12.2555,9.5355 12.0195,9.2985 C11.5855,8.8655 10.9505,8.2295 10.4615,7.7415 C10.0685,7.3485 9.4375,7.3375 9.0325,7.7175 C7.3185,9.3265 2.9415,13.1955 0.4995,13.1955 C0.4995,13.1955 2.5555,16.2785 5.6385,19.3615 C8.7215,22.4445 11.8045,24.5005 11.8045,24.5005 C11.8045,22.0575 15.6735,17.6815 17.2825,15.9675 C17.6625,15.5625 17.6515,14.9315 17.2585,14.5385 L15.7035,12.9825 C15.4665,12.7465 15.5195,12.3485 15.8165,12.1935 C17.1755,11.4815 18.8185,10.3175 20.6315,8.5035 C25.1475,3.9885 24.7325,1.4435 24.1445,0.8555 Z" id="Stroke-19" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M23,2.5 C23,2.776 22.776,3 22.5,3 C22.224,3 22,2.776 22,2.5 C22,2.224 22.224,2 22.5,2 C22.776,2 23,2.224 23,2.5" id="Fill-21" fill="#000000"></path>
+            </g>
+        </g>
+    </g>
+</svg>
