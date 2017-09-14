@@ -29,7 +29,7 @@
 }
 
 .nav-item > button:hover {
-  background-color: #f0f0f0;
+  background-color: #f5f5f5;
   color: rgb(0, 120, 215);
 }
 
@@ -43,6 +43,7 @@
 
 .nav-item > button > div {
   line-height: 34px;
+  padding: 0 32px 0 8px;
 }
 
 #settings {
@@ -58,9 +59,53 @@
 }
 
 .tab {
-  padding: 8px;
+  flex: 1;
 }
 
 .tab > div {
-  font-size: 24px;
+  font-size: 28px;
+}
+
+.tab-title {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.tab-title > * {
+  display: inline-block;
+}
+
+.tab-title > div {
+  line-height: 32px;
+  padding-left: 16px;
+}
+
+.tab-subtitle {
+  font-size: 14px;
+  color: #777;
+  max-width: 600px;
+}
+
+.hometab > div {
+  background-color: #f5f5f5;
+  padding: 48px;
+}
+
+.hometab > div > div:first-child {
+  padding: 24px 0;
+  font-size: 44px;
+  font-weight: 300;
+}
+
+.hometab > div > div:last-child {
+  font-size: 14px;
+  color: #777;
+}
+
+.protectiontab,
+.healthtab,
+.firewalltab,
+.apptab,
+.familytab {
+  padding: 32px 0 0 32px;
 }
