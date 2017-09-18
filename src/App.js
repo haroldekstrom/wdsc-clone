@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { TransitionGroup, CSSTransition } from "react-transition-group"
 import "./App.css"
 import menuIcon from "./menu.svg"
 import homeIcon from "./home.svg"
@@ -31,9 +32,17 @@ class Nav extends Component {
     const items = [
       { id: "menu", icon: menuIcon, title: null },
       { id: "home", icon: homeIcon, title: "Home" },
-      { id: "protection", icon: shieldIcon, title: "Virus & threat protection" },
+      {
+        id: "protection",
+        icon: shieldIcon,
+        title: "Virus & threat protection",
+      },
       { id: "health", icon: healthIcon, title: "Device performance & health" },
-      { id: "firewall", icon: firewallIcon, title: "Firewall & network protection" },
+      {
+        id: "firewall",
+        icon: firewallIcon,
+        title: "Firewall & network protection",
+      },
       { id: "app", icon: appIcon, title: "App & browser control" },
       { id: "family", icon: familyIcon, title: "Family options" },
       { id: "settings", icon: gearIcon, title: null },
@@ -60,7 +69,7 @@ class Nav extends Component {
 class HomeTab extends Component {
   render() {
     return (
-      <div className="hometab">
+      <div className="tab hometab">
         <div>
           <div>Your device is being protected.</div>
           <div>
@@ -77,15 +86,15 @@ class HomeTab extends Component {
 class ProtectionTab extends Component {
   render() {
     return (
-      <div className="protectiontab">
+      <div className="tab protectiontab">
         <div className="tab-header">
           <div className="tab-title">
             <img src={shieldIcon} height="32" width="32" alt="" />
             <div>Virus & threat protection</div>
           </div>
           <div className="tab-subtitle">
-            View threat history, scan for viruses and other threats, specify protection settings,
-            and get protection udpates.
+            View threat history, scan for viruses and other threats, specify
+            protection settings, and get protection udpates.
           </div>
         </div>
       </div>
@@ -96,15 +105,16 @@ class ProtectionTab extends Component {
 class HealthTab extends Component {
   render() {
     return (
-      <div className="healthtab">
+      <div className="tab healthtab">
         <div className="tab-header">
           <div className="tab-title">
             <img src={healthIcon} height="32" width="32" alt="" />
             <div>Device performance & health</div>
           </div>
           <div className="tab-subtitle">
-            Check that your Windows is up-to-date and if there are any issues impacting your device
-            health. The Health report shows the status of the most recent scan.
+            Check that your Windows is up-to-date and if there are any issues
+            impacting your device health. The Health report shows the status of
+            the most recent scan.
           </div>
         </div>
       </div>
@@ -115,15 +125,15 @@ class HealthTab extends Component {
 class FirewallTab extends Component {
   render() {
     return (
-      <div className="firewalltab">
+      <div className="tab firewalltab">
         <div className="tab-header">
           <div className="tab-title">
             <img src={firewallIcon} height="32" width="32" alt="" />
             <div>Firewall & network protection</div>
           </div>
           <div className="tab-subtitle">
-            View network connections, specify Windows Firewall settings, and troubleshoot network
-            and Internet problems.
+            View network connections, specify Windows Firewall settings, and
+            troubleshoot network and Internet problems.
           </div>
         </div>
       </div>
@@ -134,7 +144,7 @@ class FirewallTab extends Component {
 class AppTab extends Component {
   render() {
     return (
-      <div className="apptab">
+      <div className="tab apptab">
         <div className="tab-header">
           <div className="tab-title">
             <img src={appIcon} height="32" width="32" alt="" />
@@ -152,7 +162,7 @@ class AppTab extends Component {
 class FamilyTab extends Component {
   render() {
     return (
-      <div className="familytab">
+      <div className="tab familytab">
         <div className="tab-header">
           <div className="tab-title">
             <img src={familyIcon} height="32" width="32" alt="" />
@@ -160,6 +170,26 @@ class FamilyTab extends Component {
           </div>
           <div className="tab-subtitle">
             Get what you need to simplify your family's digital life.
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+class SettingsTab extends Component {
+  render() {
+    return (
+      <div className="tab settingstab">
+        <div className="tab-header">
+          <div className="tab-title">
+            <img src={gearIcon} height="32" width="32" alt="" />
+            <div>Settings</div>
+          </div>
+          <div className="tab-subtitle">
+            Windows Defender will send notifications with critical information
+            about the health and security of your device. You can specify which
+            non-critical notifications you would like.
           </div>
         </div>
       </div>
@@ -210,6 +240,9 @@ class App extends Component {
       case "family":
         tab = <FamilyTab />
         break
+      case "settings":
+        tab = <SettingsTab />
+        break
       default:
         break
     }
@@ -220,7 +253,15 @@ class App extends Component {
           expand={this.state.navExpand}
           onNavClick={this.onSwitchTab}
         />
-        <main className="tab">{tab}</main>
+        <TransitionGroup component="main">
+          <CSSTransition
+            key={this.state.navTab}
+            classNames="tab"
+            timeout={{ enter: 500, exit: 0 }}
+          >
+            {tab}
+          </CSSTransition>
+        </TransitionGroup>
       </div>
     )
   }
