@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
+import styled from "styled-components"
 import "./App.css"
 import menuIcon from "./menu.svg"
 import homeIcon from "./home.svg"
@@ -141,6 +142,31 @@ class FirewallTab extends Component {
   }
 }
 
+const SettingsGroupTitle = styled.h2`
+  font-size: 22px;
+  font-weight: normal;
+`
+
+const SettingsGroupSubtitle = styled.div`
+  max-width: 600px;
+  color: #777;  
+`
+
+class SettingsControlGroup extends Component {
+  render() {
+    const { title, subtitle, enabled } = this.props
+    return (
+      <div>
+        <SettingsGroupTitle>
+          <div>{title}</div>
+        </SettingsGroupTitle>
+        <SettingsGroupSubtitle>{subtitle}</SettingsGroupSubtitle>
+        <div>{enabled}</div>
+      </div>
+    )
+  }
+}
+
 class AppTab extends Component {
   render() {
     return (
@@ -154,6 +180,11 @@ class AppTab extends Component {
             Set up Windows Defender SmartScreen settings for apps and browsers.
           </div>
         </div>
+        <SettingsControlGroup
+            title="Warn me about unrecognized apps"
+            subtitle="Windows Defender SmartScreen can help protect your device by warning you before running unrecognized apps and files from the Web."
+            enabled={true}
+          />
       </div>
     )
   }
