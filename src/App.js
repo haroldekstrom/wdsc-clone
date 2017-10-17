@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
-import styled from "styled-components"
+import styled, { injectGlobal } from "styled-components"
 import "./App.css"
 import menuIcon from "./menu.svg"
 import homeIcon from "./home.svg"
@@ -16,47 +16,50 @@ const NavItemButton = styled.button`
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: 6px solid transparent;
+  border-left: ${props => props.active ? "6px solid rgb(0, 120, 215)" : "6px solid transparent"};
   border-radius: 0;
   display: flex;
   padding: 8px 8px 8px 2px;
-  width: 100%;
+  width: ${props => props.fullWidth ? "100%" : "auto"};
   font-size: 16px;
-  color: #333;
-
-  &.active {
-    border-left: 6px solid rgb(0, 120, 215);
-    color: rgb(0, 120, 215);
-  }
+  color: ${props => props.active ? "rgb(0, 120, 215)" : "#333"};
 
   &:hover {
     background-color: #f5f5f5;
     color: rgb(0, 120, 215);
   }
 
-  & > * {
+  > * {
     display: inline-block;
   }
 
-  & > img {
+  > img {
     padding: 8px;
   }
 
-  & > div {
+  > div {
     line-height: 34px;
     padding: 0 32px 0 8px;
   }
 `
 
+injectGlobal`
+  #settings {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+`
+
 class NavItem extends Component {
   render() {
-    const { id, active, icon, title } = this.props
-    const className = active ? "active" : ""
-    //console.log("id=", id, "active=", active)
+    const { id, active, icon, fullWidth, title } = this.props
     return (
       <div id={id}>
         <NavItemButton
-          className={className}
+          active={active}
+          fullWidth={fullWidth}
           onClick={e => this.props.onNavClick(id)}
         >
           <img src={icon} height="18" width="18" alt="" />
@@ -104,6 +107,7 @@ class NavBar extends Component {
               onNavClick={onNavClick}
               active={item.id === active}
               icon={item.icon}
+              fullWidth={item.title !== null}
               title={expand ? item.title : null}
             />
           )
@@ -113,28 +117,28 @@ class NavBar extends Component {
   }
 }
 
-const Tab = styled.div`
-  padding: 32px 0 0 32px;
+const Tab = styled.div`padding: 32px 0 0 32px;`
 
-  &-enter {
+injectGlobal`
+  .tab-enter {
     opacity: 0;
     transform: translateY(20px);
     transition: visibility 0s 0.12s linear, opacity 0.12s ease-in,
       transform 0.12s ease-in;
   }
 
-  &-enter&-enter-active {
+  .tab-enter.tab-enter-active {
     opacity: 1;
     transform: translateY(0);
     transition: visibility 0s 0s linear, opacity 0.36s ease-out,
       transform 0.36s ease-out;
   }
 
-  &-exit&-exit-active {
+  .tab-exit.tab-exit-active {
     opacity: 0;
   }
 
-  &-exit {
+  .tab-exit {
     opacity: 0;
   }
 `
@@ -164,10 +168,30 @@ const TabSubTitle = styled.div`
   max-width: 600px;
 `
 
+const HomeTabWrapper = Tab.extend`
+  padding: 0;
+
+  > div {
+    background-color: #f5f5f5;
+    padding: 48px;
+  }
+
+  > div > div:first-child {
+    padding: 24px 0;
+    font-size: 44px;
+    font-weight: 300;
+  }
+
+  > div > div:last-child {
+    font-size: 14px;
+    color: #777;
+  }
+`
+
 class HomeTab extends Component {
   render() {
     return (
-      <Tab className="tab hometab">
+      <HomeTabWrapper className="tab hometab">
         <div>
           <div>Your device is being protected.</div>
           <div>
@@ -176,7 +200,7 @@ class HomeTab extends Component {
             Last health scan: 9/14/2017
           </div>
         </div>
-      </Tab>
+      </HomeTabWrapper>
     )
   }
 }
@@ -191,8 +215,8 @@ class ProtectionTab extends Component {
             <div>Virus & threat protection</div>
           </TabTitle>
           <TabSubTitle>
-            View threat history, scan for viruses and other threats, specify
-            protection settings, and get protection udpates.
+            View threat history, scan for viruses and other threats, specify protection settings,
+            and get protection udpates.
           </TabSubTitle>
         </TabHeader>
       </Tab>
@@ -210,9 +234,8 @@ class HealthTab extends Component {
             <div>Device performance & health</div>
           </TabTitle>
           <TabSubTitle>
-            Check that your Windows is up-to-date and if there are any issues
-            impacting your device health. The Health report shows the status of
-            the most recent scan.
+            Check that your Windows is up-to-date and if there are any issues impacting your device
+            health. The Health report shows the status of the most recent scan.
           </TabSubTitle>
         </TabHeader>
       </Tab>
@@ -230,8 +253,8 @@ class FirewallTab extends Component {
             <div>Firewall & network protection</div>
           </TabTitle>
           <TabSubTitle>
-            View network connections, specify Windows Firewall settings, and
-            troubleshoot network and Internet problems.
+            View network connections, specify Windows Firewall settings, and troubleshoot network
+            and Internet problems.
           </TabSubTitle>
         </TabHeader>
       </Tab>
@@ -296,9 +319,7 @@ class FamilyTab extends Component {
             <img src={familyIcon} height="32" width="32" alt="" />
             <div>Family options</div>
           </TabTitle>
-          <TabSubTitle>
-            Get what you need to simplify your family's digital life.
-          </TabSubTitle>
+          <TabSubTitle>Get what you need to simplify your family's digital life.</TabSubTitle>
         </TabHeader>
       </Tab>
     )
@@ -315,9 +336,9 @@ class SettingsTab extends Component {
             <div>Settings</div>
           </TabTitle>
           <TabSubTitle>
-            Windows Defender will send notifications with critical information
-            about the health and security of your device. You can specify which
-            non-critical notifications you would like.
+            Windows Defender will send notifications with critical information about the health and
+            security of your device. You can specify which non-critical notifications you would
+            like.
           </TabSubTitle>
         </TabHeader>
       </Tab>
@@ -329,6 +350,10 @@ const AppContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: row;
+
+  > main {
+    flex: 1;
+  }
 `
 
 class App extends Component {
@@ -388,11 +413,7 @@ class App extends Component {
           onNavClick={this.onSwitchTab}
         />
         <TransitionGroup component="main">
-          <CSSTransition
-            key={this.state.navTab}
-            classNames="tab"
-            timeout={{ enter: 500, exit: 0 }}
-          >
+          <CSSTransition key={this.state.navTab} classNames="tab" timeout={{ enter: 500, exit: 0 }}>
             {tab}
           </CSSTransition>
         </TransitionGroup>
