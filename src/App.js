@@ -11,23 +11,69 @@ import appIcon from "./globe-connections.svg"
 import familyIcon from "./globe-connections.svg"
 import gearIcon from "./gear.svg"
 
+const NavItemButton = styled.button`
+  background-color: transparent;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-left: 6px solid transparent;
+  border-radius: 0;
+  display: flex;
+  padding: 8px 8px 8px 2px;
+  width: 100%;
+  font-size: 16px;
+  color: #333;
+
+  &.active {
+    border-left: 6px solid rgb(0, 120, 215);
+    color: rgb(0, 120, 215);
+  }
+
+  &:hover {
+    background-color: #f5f5f5;
+    color: rgb(0, 120, 215);
+  }
+
+  & > * {
+    display: inline-block;
+  }
+
+  & > img {
+    padding: 8px;
+  }
+
+  & > div {
+    line-height: 34px;
+    padding: 0 32px 0 8px;
+  }
+`
+
 class NavItem extends Component {
   render() {
     const { id, active, icon, title } = this.props
-    const className = active ? "nav-item active" : "nav-item"
+    const className = active ? "active" : ""
     //console.log("id=", id, "active=", active)
     return (
-      <div id={id} className={className}>
-        <button onClick={e => this.props.onNavClick(id)}>
+      <div id={id}>
+        <NavItemButton
+          className={className}
+          onClick={e => this.props.onNavClick(id)}
+        >
           <img src={icon} height="18" width="18" alt="" />
           {title && <div>{title}</div>}
-        </button>
+        </NavItemButton>
       </div>
     )
   }
 }
 
-class Nav extends Component {
+const Nav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  /*background-color: #fafafa;*/
+`
+
+class NavBar extends Component {
   render() {
     const { active, expand, onNavClick } = this.props
     const items = [
@@ -49,7 +95,7 @@ class Nav extends Component {
       { id: "settings", icon: gearIcon, title: null },
     ]
     return (
-      <nav className="nav">
+      <Nav>
         {items.map((item, i) => {
           return (
             <NavItem
@@ -62,15 +108,66 @@ class Nav extends Component {
             />
           )
         })}
-      </nav>
+      </Nav>
     )
   }
 }
 
+const Tab = styled.div`
+  padding: 32px 0 0 32px;
+
+  &-enter {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: visibility 0s 0.12s linear, opacity 0.12s ease-in,
+      transform 0.12s ease-in;
+  }
+
+  &-enter&-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: visibility 0s 0s linear, opacity 0.36s ease-out,
+      transform 0.36s ease-out;
+  }
+
+  &-exit&-exit-active {
+    opacity: 0;
+  }
+
+  &-exit {
+    opacity: 0;
+  }
+`
+
+const TabHeader = styled.div`
+  font-size: 28px;
+  margin-bottom: 32px;
+`
+
+const TabTitle = styled.div`
+  display: flex;
+  margin-bottom: 16px;
+
+  & > * {
+    display: inline-block;
+  }
+
+  & > div {
+    line-height: 32px;
+    padding-left: 16px;
+  }
+`
+
+const TabSubTitle = styled.div`
+  font-size: 14px;
+  color: #777;
+  max-width: 600px;
+`
+
 class HomeTab extends Component {
   render() {
     return (
-      <div className="tab hometab">
+      <Tab className="tab hometab">
         <div>
           <div>Your device is being protected.</div>
           <div>
@@ -79,7 +176,7 @@ class HomeTab extends Component {
             Last health scan: 9/14/2017
           </div>
         </div>
-      </div>
+      </Tab>
     )
   }
 }
@@ -87,18 +184,18 @@ class HomeTab extends Component {
 class ProtectionTab extends Component {
   render() {
     return (
-      <div className="tab protectiontab">
-        <div className="tab-header">
-          <div className="tab-title">
+      <Tab className="tab protectiontab">
+        <TabHeader>
+          <TabTitle>
             <img src={shieldIcon} height="32" width="32" alt="" />
             <div>Virus & threat protection</div>
-          </div>
-          <div className="tab-subtitle">
+          </TabTitle>
+          <TabSubTitle>
             View threat history, scan for viruses and other threats, specify
             protection settings, and get protection udpates.
-          </div>
-        </div>
-      </div>
+          </TabSubTitle>
+        </TabHeader>
+      </Tab>
     )
   }
 }
@@ -106,19 +203,19 @@ class ProtectionTab extends Component {
 class HealthTab extends Component {
   render() {
     return (
-      <div className="tab healthtab">
-        <div className="tab-header">
-          <div className="tab-title">
+      <Tab className="tab healthtab">
+        <TabHeader>
+          <TabTitle>
             <img src={healthIcon} height="32" width="32" alt="" />
             <div>Device performance & health</div>
-          </div>
-          <div className="tab-subtitle">
+          </TabTitle>
+          <TabSubTitle>
             Check that your Windows is up-to-date and if there are any issues
             impacting your device health. The Health report shows the status of
             the most recent scan.
-          </div>
-        </div>
-      </div>
+          </TabSubTitle>
+        </TabHeader>
+      </Tab>
     )
   }
 }
@@ -126,18 +223,18 @@ class HealthTab extends Component {
 class FirewallTab extends Component {
   render() {
     return (
-      <div className="tab firewalltab">
-        <div className="tab-header">
-          <div className="tab-title">
+      <Tab className="tab firewalltab">
+        <TabHeader>
+          <TabTitle>
             <img src={firewallIcon} height="32" width="32" alt="" />
             <div>Firewall & network protection</div>
-          </div>
-          <div className="tab-subtitle">
+          </TabTitle>
+          <TabSubTitle>
             View network connections, specify Windows Firewall settings, and
             troubleshoot network and Internet problems.
-          </div>
-        </div>
-      </div>
+          </TabSubTitle>
+        </TabHeader>
+      </Tab>
     )
   }
 }
@@ -149,7 +246,7 @@ const SettingsGroupTitle = styled.h2`
 
 const SettingsGroupSubtitle = styled.div`
   max-width: 600px;
-  color: #777;  
+  color: #777;
 `
 
 class SettingsControlGroup extends Component {
@@ -170,22 +267,22 @@ class SettingsControlGroup extends Component {
 class AppTab extends Component {
   render() {
     return (
-      <div className="tab apptab">
-        <div className="tab-header">
-          <div className="tab-title">
+      <Tab className="tab apptab">
+        <TabHeader>
+          <TabTitle>
             <img src={appIcon} height="32" width="32" alt="" />
             <div>App & browser control</div>
-          </div>
-          <div className="tab-subtitle">
+          </TabTitle>
+          <TabSubTitle>
             Set up Windows Defender SmartScreen settings for apps and browsers.
-          </div>
-        </div>
+          </TabSubTitle>
+        </TabHeader>
         <SettingsControlGroup
-            title="Warn me about unrecognized apps"
-            subtitle="Windows Defender SmartScreen can help protect your device by warning you before running unrecognized apps and files from the Web."
-            enabled={true}
-          />
-      </div>
+          title="Warn me about unrecognized apps"
+          subtitle="Windows Defender SmartScreen can help protect your device by warning you before running unrecognized apps and files from the Web."
+          enabled={true}
+        />
+      </Tab>
     )
   }
 }
@@ -193,17 +290,17 @@ class AppTab extends Component {
 class FamilyTab extends Component {
   render() {
     return (
-      <div className="tab familytab">
-        <div className="tab-header">
-          <div className="tab-title">
+      <Tab className="tab familytab">
+        <TabHeader>
+          <TabTitle>
             <img src={familyIcon} height="32" width="32" alt="" />
             <div>Family options</div>
-          </div>
-          <div className="tab-subtitle">
+          </TabTitle>
+          <TabSubTitle>
             Get what you need to simplify your family's digital life.
-          </div>
-        </div>
-      </div>
+          </TabSubTitle>
+        </TabHeader>
+      </Tab>
     )
   }
 }
@@ -211,22 +308,28 @@ class FamilyTab extends Component {
 class SettingsTab extends Component {
   render() {
     return (
-      <div className="tab settingstab">
-        <div className="tab-header">
-          <div className="tab-title">
+      <Tab className="tab settingstab">
+        <TabHeader>
+          <TabTitle>
             <img src={gearIcon} height="32" width="32" alt="" />
             <div>Settings</div>
-          </div>
-          <div className="tab-subtitle">
+          </TabTitle>
+          <TabSubTitle>
             Windows Defender will send notifications with critical information
             about the health and security of your device. You can specify which
             non-critical notifications you would like.
-          </div>
-        </div>
-      </div>
+          </TabSubTitle>
+        </TabHeader>
+      </Tab>
     )
   }
 }
+
+const AppContainer = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+`
 
 class App extends Component {
   constructor(props) {
@@ -278,8 +381,8 @@ class App extends Component {
         break
     }
     return (
-      <div className="app">
-        <Nav
+      <AppContainer>
+        <NavBar
           active={this.state.navTab}
           expand={this.state.navExpand}
           onNavClick={this.onSwitchTab}
@@ -293,7 +396,7 @@ class App extends Component {
             {tab}
           </CSSTransition>
         </TransitionGroup>
-      </div>
+      </AppContainer>
     )
   }
 }
