@@ -207,6 +207,33 @@ class HomeTab extends Component {
             Last health scan: 9/14/2017
           </div>
         </div>
+        <div>
+          <div>
+            <div />
+            <div>Virus & threat protection</div>
+            <div>No action needed.</div>
+          </div>
+          <div>
+            <div />
+            <div>Device performance & health</div>
+            <div>No action needed.</div>
+          </div>
+          <div>
+            <div />
+            <div>Firewall & network protection</div>
+            <div>No action needed.</div>
+          </div>
+          <div>
+            <div />
+            <div>App & browser control</div>
+            <div>You're using recommended settings.</div>
+          </div>
+          <div>
+            <div />
+            <div>Family options</div>
+            <div>Manage how your family uses their devices.</div>
+          </div>
+        </div>
       </HomeTabWrapper>
     )
   }
@@ -226,6 +253,37 @@ class ProtectionTab extends Component {
             and get protection udpates.
           </TabSubTitle>
         </TabHeader>
+        <div>
+          <div />
+          <div>Scan history</div>
+          <div>No threats found</div>
+        </div>
+        <div>
+          <div>
+            <div>0</div>
+            <div>Threats found</div>
+          </div>
+          <div>
+            <div>81994</div>
+            <div>Files scanned</div>
+          </div>
+          <button>Quick scan</button>
+          <div>Advanced scan</div>
+        </div>
+        <div>
+          <div>
+            <div />
+            <div>Virus & threat protection settings</div>
+          </div>
+          <div>You are using the settings that Microsoft recommends.</div>
+        </div>
+        <div>
+          <div>
+            <div />
+            <div>Protection updates</div>
+          </div>
+          <div>Protection definitions are up to date.</div>
+        </div>
       </Tab>
     )
   }
@@ -245,6 +303,47 @@ class HealthTab extends Component {
             health. The Health report shows the status of the most recent scan.
           </TabSubTitle>
         </TabHeader>
+        <div>
+          <div>
+            <div />
+            <div>Health report</div>
+          </div>
+          <div>Last scan: 10/16/2017</div>
+          <div>
+            <div>
+              <div />
+              <div>Windows Update</div>
+              <div>No issues</div>
+            </div>
+            <div>
+              <div />
+              <div>Storage capacity</div>
+              <div>No issues</div>
+            </div>
+            <div>
+              <div />
+              <div>Device driver</div>
+              <div>No issues</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div />
+            <div>Fresh start</div>
+          </div>
+          <div>
+            <p>
+              Start fresh with a clean and up-to-date installation of Windows. This will keep your
+              personal files and some Windows settings, and remove some of your apps.
+            </p>
+            <p>
+              In some cases, this may improve your device's startup and shutdown experience, memory
+              usage, Store apps performance, browsing experience, and battery life.
+            </p>
+          </div>
+          <div>Additional info</div>
+        </div>
       </Tab>
     )
   }
@@ -264,6 +363,32 @@ class FirewallTab extends Component {
             and Internet problems.
           </TabSubTitle>
         </TabHeader>
+
+        <div>
+          <div>
+            <div />
+            <div>Private (discoverable) network</div>
+          </div>
+          <div>Firewall is on.</div>
+          <div>Network is not connected.</div>
+        </div>
+
+        <div>
+          <div>
+            <div />
+            <div>Public (non-discoverable) network</div>
+          </div>
+          <div>Firewall is on.</div>
+          <div>Network is connected.</div>
+        </div>
+
+        <div>
+          <div>Allow an app through firewall</div>
+          <div>Network and Internet troubleshooter</div>
+          <div>Firewall notification settings</div>
+          <div>Advanced settings</div>
+          <div>Restore firewalls to default</div>
+        </div>
       </Tab>
     )
   }
@@ -313,6 +438,66 @@ class AppTab extends Component {
           subtitle="Windows Defender SmartScreen can help protect your device by warning you before running unrecognized apps and files from the Web."
           enabled={true}
         />
+
+        <div>
+          <div>Check apps and files</div>
+          <div>
+            Windows Defender SmartScreen helps protect your device by checking for unrecognized apps
+            and files from the Web.
+          </div>
+          <div>
+            <label>
+              <input type="radio" /> Block
+            </label>
+            <label>
+              <input type="radio" /> Warn
+            </label>
+            <label>
+              <input type="radio" /> Off
+            </label>
+          </div>
+          <a href="#">Privacy statement</a>
+        </div>
+
+        <div>
+          <div>SmartScreen for Microsoft Edge</div>
+          <div>
+            Windows Defender SmartScreen Filter helps protect your device from malicious sites and
+            downloads.
+          </div>
+          <div>
+            <label>
+              <input type="radio" /> Block
+            </label>
+            <label>
+              <input type="radio" /> Warn
+            </label>
+            <label>
+              <input type="radio" /> Off
+            </label>
+          </div>
+          <a href="#">Privacy statement</a>
+        </div>
+
+        <div>
+          <div>SmartScreen for Windows Store apps</div>
+          <div>
+            Windows Defender SmartScreen Filter helps protect your device by checking web content
+            that Windows Store apps use.
+          </div>
+          <div>
+            <label>
+              <input type="radio" /> Block
+            </label>
+            <label>
+              <input type="radio" /> Warn
+            </label>
+            <label>
+              <input type="radio" /> Off
+            </label>
+          </div>
+          <a href="#">Privacy statement</a>
+        </div>
       </Tab>
     )
   }
@@ -329,6 +514,52 @@ class FamilyTab extends Component {
           </TabTitle>
           <TabSubTitle>Get what you need to simplify your family's digital life.</TabSubTitle>
         </TabHeader>
+
+        <div>
+          <div>Parental controls</div>
+          <div>
+            <div />
+            <div>Help protect your kids online.</div>
+            <div>
+              Choose which websites your kids can visit as they explore the web using Microsoft
+              Edge.
+            </div>
+          </div>
+
+          <div>
+            <div />
+            <div>Set good screen time habits.</div>
+            <div>Choose when and how much time your kids can use their devices.</div>
+          </div>
+
+          <div>
+            <div />
+            <div>Keep track of your child's digital life.</div>
+            <div>Get weekly activity reports of your kids' online activity.</div>
+          </div>
+
+          <div>
+            <div />
+            <div>Let your kids buy appropriate apps and games.</div>
+            <div>Choose what they see and purchase for their devices.</div>
+          </div>
+
+          <a href="#">View family settings</a>
+        </div>
+
+        <div>
+          <div>See your family's devices at a glance</div>
+
+          <div>
+            <div />
+            <div>Check the health and safety of your family's devices.</div>
+            <div>Make sure they're up-to-date and see device security and halth status.</div>
+          </div>
+
+          <a href="#">View devices</a>
+        </div>
+
+        <div>Not all features are available in all markets.</div>
       </Tab>
     )
   }
