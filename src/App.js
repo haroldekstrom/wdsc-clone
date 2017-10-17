@@ -16,13 +16,25 @@ const NavItemButton = styled.button`
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: ${props => props.active ? "6px solid rgb(0, 120, 215)" : "6px solid transparent"};
+  border-left: ${props => (props.active ? "6px solid rgb(0, 120, 215)" : "6px solid transparent")};
   border-radius: 0;
   display: flex;
-  padding: 8px 8px 8px 2px;
-  width: ${props => props.fullWidth ? "100%" : "auto"};
+  align-items: center;
+  padding: 8px 8px 8px 8px;
+  line-height: 34px;
+  height: 50px;
+  width: ${props => (props.fullWidth ? "100%" : "50px")};
   font-size: 16px;
-  color: ${props => props.active ? "rgb(0, 120, 215)" : "#333"};
+  color: ${props => (props.active ? "rgb(0, 120, 215)" : "#333")};
+
+  &:focus,
+  &:active:focus,
+  &.active:focus,
+  &.focus,
+  &:active.focus,
+  &.active.focus {
+    outline: 0;
+  }
 
   &:hover {
     background-color: #f5f5f5;
@@ -33,12 +45,7 @@ const NavItemButton = styled.button`
     display: inline-block;
   }
 
-  > img {
-    padding: 8px;
-  }
-
   > div {
-    line-height: 34px;
     padding: 0 32px 0 8px;
   }
 `
@@ -268,6 +275,7 @@ const SettingsGroupTitle = styled.h2`
 `
 
 const SettingsGroupSubtitle = styled.div`
+  font-size: 14px;
   max-width: 600px;
   color: #777;
 `
