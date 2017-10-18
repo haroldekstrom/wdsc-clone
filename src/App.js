@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import styled, { injectGlobal } from "styled-components"
+import "font-awesome/css/font-awesome.css"
 import "./App.css"
 import menuIcon from "./menu.svg"
 import homeIcon from "./home.svg"
@@ -16,7 +17,8 @@ const NavItemButton = styled.button`
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: ${props => (props.active ? "6px solid rgb(0, 120, 215)" : "6px solid transparent")};
+  border-left: ${props =>
+    props.active ? "6px solid rgb(0, 120, 215)" : "6px solid transparent"};
   border-radius: 0;
   display: flex;
   align-items: center;
@@ -159,11 +161,11 @@ const TabTitle = styled.div`
   display: flex;
   margin-bottom: 16px;
 
-  & > * {
+  > * {
     display: inline-block;
   }
 
-  & > div {
+  > div {
     line-height: 32px;
     padding-left: 16px;
   }
@@ -175,65 +177,83 @@ const TabSubTitle = styled.div`
   max-width: 600px;
 `
 
-const HomeTabWrapper = Tab.extend`
-  padding: 0;
+const HomeTabWrapper = Tab.extend`padding: 0;`
 
-  > div {
-    background-color: #f5f5f5;
-    padding: 48px;
-  }
+const HomeTabBanner = styled.div`
+  background-color: #f5f5f5;
+  padding: 48px;
 
-  > div > div:first-child {
+  > div:first-child {
     padding: 24px 0;
     font-size: 44px;
     font-weight: 300;
   }
 
-  > div > div:last-child {
+  > div:last-child {
     font-size: 14px;
     color: #777;
   }
+`
+
+const HomeTabPanel = styled.div`display: flex;`
+
+const HomeTabPanelItem = styled.div`padding: 28px;`
+
+const PanelItemIcon = styled.i`color: rgb(0, 120, 215);`
+
+const PanelItemTitle = styled.div`
+  font-size: 15px;
+  font-weight: normal;
+`
+
+const PanelItemSubTitle = styled.div`
+  font-size: 14px;
+  color: #777;
 `
 
 class HomeTab extends Component {
   render() {
     return (
       <HomeTabWrapper className="tab hometab">
-        <div>
+        <HomeTabBanner>
           <div>Your device is being protected.</div>
           <div>
             Last threat scan: 9/13/2017<br />
             Last threat definition update: 9/13/2017<br />
             Last health scan: 9/14/2017
           </div>
-        </div>
-        <div>
-          <div>
-            <div />
-            <div>Virus & threat protection</div>
-            <div>No action needed.</div>
-          </div>
-          <div>
-            <div />
-            <div>Device performance & health</div>
-            <div>No action needed.</div>
-          </div>
-          <div>
-            <div />
-            <div>Firewall & network protection</div>
-            <div>No action needed.</div>
-          </div>
-          <div>
-            <div />
-            <div>App & browser control</div>
-            <div>You're using recommended settings.</div>
-          </div>
-          <div>
-            <div />
-            <div>Family options</div>
-            <div>Manage how your family uses their devices.</div>
-          </div>
-        </div>
+        </HomeTabBanner>
+        <HomeTabPanel>
+          <HomeTabPanelItem>
+            <PanelItemIcon className="fa fa-shield fa-5x" />
+            <PanelItemTitle>Virus & threat protection</PanelItemTitle>
+            <PanelItemSubTitle>No action needed.</PanelItemSubTitle>
+          </HomeTabPanelItem>
+          <HomeTabPanelItem>
+            <PanelItemIcon className="fa fa-heartbeat fa-5x" />
+            <PanelItemTitle>Device performance & health</PanelItemTitle>
+            <PanelItemSubTitle>No action needed.</PanelItemSubTitle>
+          </HomeTabPanelItem>
+          <HomeTabPanelItem>
+            <PanelItemIcon className="fa fa-wifi fa-5x" />
+            <PanelItemTitle>Firewall & network protection</PanelItemTitle>
+            <PanelItemSubTitle>No action needed.</PanelItemSubTitle>
+          </HomeTabPanelItem>
+          <HomeTabPanelItem>
+            <PanelItemIcon className="fa fa-window-maximize fa-5x" />
+            <PanelItemTitle>App & browser control</PanelItemTitle>
+            <PanelItemSubTitle>
+              You're using recommended settings.
+            </PanelItemSubTitle>
+          </HomeTabPanelItem>
+          <HomeTabPanelItem>
+            <PanelItemIcon className="fa fa-child fa-5x" />
+            <PanelItemTitle>Family options</PanelItemTitle>
+            <PanelItemSubTitle>
+              Manage how your family uses their devices.
+            </PanelItemSubTitle>
+          </HomeTabPanelItem>
+        </HomeTabPanel>
       </HomeTabWrapper>
     )
   }
@@ -249,8 +269,8 @@ class ProtectionTab extends Component {
             <div>Virus & threat protection</div>
           </TabTitle>
           <TabSubTitle>
-            View threat history, scan for viruses and other threats, specify protection settings,
-            and get protection udpates.
+            View threat history, scan for viruses and other threats, specify
+            protection settings, and get protection udpates.
           </TabSubTitle>
         </TabHeader>
         <div>
@@ -299,8 +319,9 @@ class HealthTab extends Component {
             <div>Device performance & health</div>
           </TabTitle>
           <TabSubTitle>
-            Check that your Windows is up-to-date and if there are any issues impacting your device
-            health. The Health report shows the status of the most recent scan.
+            Check that your Windows is up-to-date and if there are any issues
+            impacting your device health. The Health report shows the status of
+            the most recent scan.
           </TabSubTitle>
         </TabHeader>
         <div>
@@ -334,12 +355,14 @@ class HealthTab extends Component {
           </div>
           <div>
             <p>
-              Start fresh with a clean and up-to-date installation of Windows. This will keep your
-              personal files and some Windows settings, and remove some of your apps.
+              Start fresh with a clean and up-to-date installation of Windows.
+              This will keep your personal files and some Windows settings, and
+              remove some of your apps.
             </p>
             <p>
-              In some cases, this may improve your device's startup and shutdown experience, memory
-              usage, Store apps performance, browsing experience, and battery life.
+              In some cases, this may improve your device's startup and shutdown
+              experience, memory usage, Store apps performance, browsing
+              experience, and battery life.
             </p>
           </div>
           <div>Additional info</div>
@@ -359,8 +382,8 @@ class FirewallTab extends Component {
             <div>Firewall & network protection</div>
           </TabTitle>
           <TabSubTitle>
-            View network connections, specify Windows Firewall settings, and troubleshoot network
-            and Internet problems.
+            View network connections, specify Windows Firewall settings, and
+            troubleshoot network and Internet problems.
           </TabSubTitle>
         </TabHeader>
 
@@ -442,8 +465,8 @@ class AppTab extends Component {
         <div>
           <div>Check apps and files</div>
           <div>
-            Windows Defender SmartScreen helps protect your device by checking for unrecognized apps
-            and files from the Web.
+            Windows Defender SmartScreen helps protect your device by checking
+            for unrecognized apps and files from the Web.
           </div>
           <div>
             <label>
@@ -462,8 +485,8 @@ class AppTab extends Component {
         <div>
           <div>SmartScreen for Microsoft Edge</div>
           <div>
-            Windows Defender SmartScreen Filter helps protect your device from malicious sites and
-            downloads.
+            Windows Defender SmartScreen Filter helps protect your device from
+            malicious sites and downloads.
           </div>
           <div>
             <label>
@@ -482,8 +505,8 @@ class AppTab extends Component {
         <div>
           <div>SmartScreen for Windows Store apps</div>
           <div>
-            Windows Defender SmartScreen Filter helps protect your device by checking web content
-            that Windows Store apps use.
+            Windows Defender SmartScreen Filter helps protect your device by
+            checking web content that Windows Store apps use.
           </div>
           <div>
             <label>
@@ -512,7 +535,9 @@ class FamilyTab extends Component {
             <img src={familyIcon} height="32" width="32" alt="" />
             <div>Family options</div>
           </TabTitle>
-          <TabSubTitle>Get what you need to simplify your family's digital life.</TabSubTitle>
+          <TabSubTitle>
+            Get what you need to simplify your family's digital life.
+          </TabSubTitle>
         </TabHeader>
 
         <div>
@@ -521,21 +546,25 @@ class FamilyTab extends Component {
             <div />
             <div>Help protect your kids online.</div>
             <div>
-              Choose which websites your kids can visit as they explore the web using Microsoft
-              Edge.
+              Choose which websites your kids can visit as they explore the web
+              using Microsoft Edge.
             </div>
           </div>
 
           <div>
             <div />
             <div>Set good screen time habits.</div>
-            <div>Choose when and how much time your kids can use their devices.</div>
+            <div>
+              Choose when and how much time your kids can use their devices.
+            </div>
           </div>
 
           <div>
             <div />
             <div>Keep track of your child's digital life.</div>
-            <div>Get weekly activity reports of your kids' online activity.</div>
+            <div>
+              Get weekly activity reports of your kids' online activity.
+            </div>
           </div>
 
           <div>
@@ -553,7 +582,10 @@ class FamilyTab extends Component {
           <div>
             <div />
             <div>Check the health and safety of your family's devices.</div>
-            <div>Make sure they're up-to-date and see device security and halth status.</div>
+            <div>
+              Make sure they're up-to-date and see device security and halth
+              status.
+            </div>
           </div>
 
           <a href="#">View devices</a>
@@ -575,9 +607,9 @@ class SettingsTab extends Component {
             <div>Settings</div>
           </TabTitle>
           <TabSubTitle>
-            Windows Defender will send notifications with critical information about the health and
-            security of your device. You can specify which non-critical notifications you would
-            like.
+            Windows Defender will send notifications with critical information
+            about the health and security of your device. You can specify which
+            non-critical notifications you would like.
           </TabSubTitle>
         </TabHeader>
       </Tab>
@@ -600,7 +632,7 @@ class App extends Component {
     super(props)
     this.onSwitchTab = this.onSwitchTab.bind(this)
     this.state = {
-      navTab: "protection",
+      navTab: "home",
       navExpand: true,
     }
   }
@@ -652,7 +684,11 @@ class App extends Component {
           onNavClick={this.onSwitchTab}
         />
         <TransitionGroup component="main">
-          <CSSTransition key={this.state.navTab} classNames="tab" timeout={{ enter: 500, exit: 0 }}>
+          <CSSTransition
+            key={this.state.navTab}
+            classNames="tab"
+            timeout={{ enter: 500, exit: 0 }}
+          >
             {tab}
           </CSSTransition>
         </TransitionGroup>
