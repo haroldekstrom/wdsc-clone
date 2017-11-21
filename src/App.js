@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
-import styled, { injectGlobal } from "styled-components"
+import styled, { injectGlobal, ThemeProvider, withTheme } from "styled-components"
 import "font-awesome/css/font-awesome.css"
 import "./App.css"
 import menuIcon from "./menu.svg"
@@ -26,7 +26,7 @@ const NavItemButton = styled.button`
   height: 50px;
   width: ${props => (props.fullWidth ? "100%" : "50px")};
   font-size: 16px;
-  color: ${props => (props.active ? "rgb(0, 120, 215)" : "#333")};
+  color: ${props => (props.active ? "rgb(0, 120, 215)" : props.theme.textColor)};
 
   &:focus,
   &:active:focus {
@@ -34,12 +34,12 @@ const NavItemButton = styled.button`
   }
 
   &:hover {
-    background-color: #f5f5f5;
-    color: rgb(0, 120, 215);
+    background-color: ${props => props.theme.hoverColor};
+    color: ${props => props.theme.hoverTextColor};
   }
 
   &:active {
-    background-color: #cccccc;
+    background-color: ${props => props.theme.activeColor};
   }
 
   > * {
@@ -126,7 +126,11 @@ class NavBar extends Component {
   }
 }
 
-const Tab = styled.div`padding: 32px 0 0 32px;`
+const Tab = styled.div`
+  padding: 32px 0 0 32px;
+  background-color: ${props => props.theme.backgroundColor};
+  color: ${props => props.theme.textColor};
+`
 
 injectGlobal`
   .tab-enter {
@@ -173,15 +177,15 @@ const TabTitle = styled.div`
 
 const TabSubTitle = styled.div`
   font-size: 14px;
-  color: #777;
+  color: ${props => props.theme.subTitleColor};
   max-width: 600px;
 `
 
 const HomeTabWrapper = Tab.extend`padding: 0;`
 
 const HomeTabBanner = styled.div`
-  background-color: #f2f2f2;
-  padding: 48px;
+  background-color: ${props => props.theme.bannerBackgroundColor};
+  padding: 32px;
 
   > div:first-child {
     padding: 24px 0;
@@ -203,9 +207,10 @@ const HomeTabPanel = styled.div`
 `
 
 const HomeTabPanelButton = styled.button`
-  padding: 28px;
+  padding: 24px;
   text-align: left;
   background-color: transparent;
+  color: ${props => props.theme.textColor};
   border: none;
 
   &:focus,
@@ -214,11 +219,11 @@ const HomeTabPanelButton = styled.button`
   }
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: ${props => props.theme.hoverColor};
   }
 
   &:active {
-    background-color: #cccccc;
+    background-color: ${props => props.theme.activeColor};
   }
 `
 
@@ -232,7 +237,7 @@ const PanelItemTitle = styled.div`
 
 const PanelItemSubTitle = styled.div`
   font-size: 14px;
-  color: #777;
+  color: ${props => props.theme.subTitleColor};
 `
 
 class HomeTab extends Component {
@@ -446,7 +451,7 @@ const SettingsGroupTitle = styled.h2`
 const SettingsGroupSubtitle = styled.div`
   font-size: 14px;
   max-width: 600px;
-  color: #777;
+  color: ${props => props.theme.subTitleColor};
 `
 
 class SettingsControlGroup extends Component {
@@ -463,6 +468,13 @@ class SettingsControlGroup extends Component {
     )
   }
 }
+
+const VerticalRadioGroup = styled.div`
+  label {
+    display: block;
+    margin: 0;
+  }
+`
 
 class AppTab extends Component {
   render() {
@@ -489,7 +501,7 @@ class AppTab extends Component {
             Windows Defender SmartScreen helps protect your device by checking for unrecognized apps
             and files from the Web.
           </div>
-          <div>
+          <VerticalRadioGroup>
             <label>
               <input type="radio" /> Block
             </label>
@@ -499,7 +511,7 @@ class AppTab extends Component {
             <label>
               <input type="radio" /> Off
             </label>
-          </div>
+          </VerticalRadioGroup>
           <a href="#">Privacy statement</a>
         </div>
 
@@ -509,7 +521,7 @@ class AppTab extends Component {
             Windows Defender SmartScreen Filter helps protect your device from malicious sites and
             downloads.
           </div>
-          <div>
+          <VerticalRadioGroup>
             <label>
               <input type="radio" /> Block
             </label>
@@ -519,7 +531,7 @@ class AppTab extends Component {
             <label>
               <input type="radio" /> Off
             </label>
-          </div>
+          </VerticalRadioGroup>
           <a href="#">Privacy statement</a>
         </div>
 
@@ -529,7 +541,7 @@ class AppTab extends Component {
             Windows Defender SmartScreen Filter helps protect your device by checking web content
             that Windows Store apps use.
           </div>
-          <div>
+          <VerticalRadioGroup>
             <label>
               <input type="radio" /> Block
             </label>
@@ -539,7 +551,7 @@ class AppTab extends Component {
             <label>
               <input type="radio" /> Off
             </label>
-          </div>
+          </VerticalRadioGroup>
           <a href="#">Privacy statement</a>
         </div>
       </Tab>
@@ -609,7 +621,14 @@ class FamilyTab extends Component {
   }
 }
 
-class SettingsTab extends Component {
+class SettingsTabBase extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      theme: props.theme,
+    }
+  }
+
   render() {
     return (
       <Tab className="tab settingstab">
@@ -624,28 +643,79 @@ class SettingsTab extends Component {
             like.
           </TabSubTitle>
         </TabHeader>
+        <VerticalRadioGroup>
+          <label>
+            <input
+              type="radio"
+              name="lighttheme"
+              checked={this.props.theme.name === "light"}
+              onChange={this.props.onSetLightTheme}
+            />{" "}
+            Light
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="darktheme"
+              checked={this.props.theme.name === "dark"}
+              onChange={this.props.onSetDarkTheme}
+            />{" "}
+            Dark
+          </label>
+        </VerticalRadioGroup>
       </Tab>
     )
   }
 }
 
+const SettingsTab = withTheme(SettingsTabBase)
+
 const AppContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: row;
+  background-color: ${props => props.theme.backgroundColor};
+  color: ${props => props.theme.textColor};
 
   > main {
     flex: 1;
   }
 `
 
+const lightTheme = {
+  name: "light",
+  backgroundColor: "#fff",
+  textColor: "#333",
+  textMutedColor: "#999",
+  bannerBackgroundColor: "#f2f2f2",
+  hoverColor: "#f5f5f5",
+  hoverTextColor: "rgb(0, 120, 215)",
+  activeColor: "#ccc",
+  subTitleColor: "#777",
+}
+
+const darkTheme = {
+  name: "dark",
+  backgroundColor: "#000",
+  textColor: "#fff",
+  textMutedColor: "#999",
+  bannerBackgroundColor: "#181818",
+  hoverColor: "#181818",
+  hoverTextColor: "rgb(0, 120, 215)",
+  activeColor: "#333",
+  subTitleColor: "#777",
+}
+
 class App extends Component {
   constructor(props) {
     super(props)
     this.onSwitchTab = this.onSwitchTab.bind(this)
+    this.onSetLightTheme = this.onSetLightTheme.bind(this)
+    this.onSetDarkTheme = this.onSetDarkTheme.bind(this)
     this.state = {
       navTab: "home",
       navExpand: true,
+      theme: lightTheme,
     }
   }
 
@@ -661,11 +731,21 @@ class App extends Component {
     }
   }
 
+  onSetLightTheme() {
+    console.log("set light theme")
+    this.setState({ theme: lightTheme })
+  }
+
+  onSetDarkTheme() {
+    console.log("set dark theme")
+    this.setState({ theme: darkTheme })
+  }
+
   render() {
     let tab = null
     switch (this.state.navTab) {
       case "home":
-        tab = <HomeTab />
+        tab = <HomeTab onSwitchTab={this.onSwitchTab} />
         break
       case "protection":
         tab = <ProtectionTab />
@@ -683,24 +763,35 @@ class App extends Component {
         tab = <FamilyTab />
         break
       case "settings":
-        tab = <SettingsTab />
+        tab = (
+          <SettingsTab
+            onSetLightTheme={this.onSetLightTheme}
+            onSetDarkTheme={this.onSetDarkTheme}
+          />
+        )
         break
       default:
         break
     }
     return (
-      <AppContainer>
-        <NavBar
-          active={this.state.navTab}
-          expand={this.state.navExpand}
-          onNavClick={this.onSwitchTab}
-        />
-        <TransitionGroup component="main">
-          <CSSTransition key={this.state.navTab} classNames="tab" timeout={{ enter: 500, exit: 0 }}>
-            {tab}
-          </CSSTransition>
-        </TransitionGroup>
-      </AppContainer>
+      <ThemeProvider theme={this.state.theme}>
+        <AppContainer>
+          <NavBar
+            active={this.state.navTab}
+            expand={this.state.navExpand}
+            onNavClick={this.onSwitchTab}
+          />
+          <TransitionGroup component="main">
+            <CSSTransition
+              key={this.state.navTab}
+              classNames="tab"
+              timeout={{ enter: 500, exit: 0 }}
+            >
+              {tab}
+            </CSSTransition>
+          </TransitionGroup>
+        </AppContainer>
+      </ThemeProvider>
     )
   }
 }
