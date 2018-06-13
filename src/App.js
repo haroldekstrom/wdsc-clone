@@ -1,6 +1,10 @@
+// @ts-check
+
 import React, { Component } from "react"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import styled, { injectGlobal, ThemeProvider, withTheme } from "styled-components"
+import Toggle from "react-toggle"
+import "react-toggle/style.css"
 import "font-awesome/css/font-awesome.css"
 import "./App.css"
 import menuIcon from "./menu.svg"
@@ -181,7 +185,9 @@ const TabSubTitle = styled.div`
   max-width: 600px;
 `
 
-const HomeTabWrapper = Tab.extend`padding: 0;`
+const HomeTabWrapper = Tab.extend`
+  padding: 0;
+`
 
 const HomeTabBanner = styled.div`
   background-color: ${props => props.theme.bannerBackgroundColor};
@@ -227,7 +233,9 @@ const HomeTabPanelButton = styled.button`
   }
 `
 
-const PanelItemIcon = styled.i`color: rgb(0, 120, 215);`
+const PanelItemIcon = styled.i`
+  color: rgb(0, 120, 215);
+`
 
 const PanelItemTitle = styled.div`
   font-size: 15px;
@@ -553,6 +561,11 @@ class AppTab extends Component {
             </label>
           </VerticalRadioGroup>
           <a href="#">Privacy statement</a>
+          <br />
+          <label>
+            <Toggle icons={false} />
+            <span>No icons</span>
+          </label>
         </div>
       </Tab>
     )

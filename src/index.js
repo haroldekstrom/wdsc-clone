@@ -7,3 +7,10 @@ import App from "./App"
 
 ReactDOM.render(<App />, document.getElementById("root"))
 //registerServiceWorker();
+
+/*
+// https://daveceddia.com/hot-reloading-create-react-app/
+if (module.hot) {
+  module.hot.accept()
+}
+*/
