@@ -1,8 +1,6 @@
-// @ts-check
-
 import React, { Component } from "react"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
-import styled, { injectGlobal, ThemeProvider, withTheme } from "styled-components"
+import styled, { createGlobalStyle, ThemeProvider, withTheme } from "styled-components/macro"
 import Toggle from "react-toggle"
 import "react-toggle/style.css"
 import "font-awesome/css/font-awesome.css"
@@ -55,12 +53,34 @@ const NavItemButton = styled.button`
   }
 `
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   #settings {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+  }
+
+  .tab-enter {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: visibility 0s 0.12s linear, opacity 0.12s ease-in,
+      transform 0.12s ease-in;
+  }
+
+  .tab-enter.tab-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: visibility 0s 0s linear, opacity 0.36s ease-out,
+      transform 0.36s ease-out;
+  }
+
+  .tab-exit.tab-exit-active {
+    opacity: 0;
+  }
+
+  .tab-exit {
+    opacity: 0;
   }
 `
 
@@ -136,30 +156,6 @@ const Tab = styled.div`
   color: ${props => props.theme.textColor};
 `
 
-injectGlobal`
-  .tab-enter {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: visibility 0s 0.12s linear, opacity 0.12s ease-in,
-      transform 0.12s ease-in;
-  }
-
-  .tab-enter.tab-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-    transition: visibility 0s 0s linear, opacity 0.36s ease-out,
-      transform 0.36s ease-out;
-  }
-
-  .tab-exit.tab-exit-active {
-    opacity: 0;
-  }
-
-  .tab-exit {
-    opacity: 0;
-  }
-`
-
 const TabHeader = styled.div`
   font-size: 28px;
   margin-bottom: 32px;
@@ -185,7 +181,7 @@ const TabSubTitle = styled.div`
   max-width: 600px;
 `
 
-const HomeTabWrapper = Tab.extend`
+const HomeTabWrapper = styled(Tab)`
   padding: 0;
 `
 
@@ -255,8 +251,10 @@ class HomeTab extends Component {
         <HomeTabBanner>
           <div>Your device is being protected.</div>
           <div>
-            Last threat scan: 9/13/2017<br />
-            Last threat definition update: 9/13/2017<br />
+            Last threat scan: 9/13/2017
+            <br />
+            Last threat definition update: 9/13/2017
+            <br />
             Last health scan: 9/14/2017
           </div>
         </HomeTabBanner>
@@ -280,14 +278,18 @@ class HomeTab extends Component {
             <PanelItemIcon className="fa fa-window-maximize fa-4x" />
             <PanelItemTitle>App & browser control</PanelItemTitle>
             <PanelItemSubTitle>
-              You're using<br />recommended settings.
+              You're using
+              <br />
+              recommended settings.
             </PanelItemSubTitle>
           </HomeTabPanelButton>
           <HomeTabPanelButton>
             <PanelItemIcon className="fa fa-child fa-4x" />
             <PanelItemTitle>Family options</PanelItemTitle>
             <PanelItemSubTitle>
-              Manage how your family<br />uses their devices.
+              Manage how your family
+              <br />
+              uses their devices.
             </PanelItemSubTitle>
           </HomeTabPanelButton>
         </HomeTabPanel>
@@ -789,6 +791,7 @@ class App extends Component {
     return (
       <ThemeProvider theme={this.state.theme}>
         <AppContainer>
+          <GlobalStyle />
           <NavBar
             active={this.state.navTab}
             expand={this.state.navExpand}
