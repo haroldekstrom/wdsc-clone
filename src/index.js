@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import "bootstrap-v4-dev/dist/css/bootstrap-reboot.css"
+import "bootstrap/dist/css/bootstrap-reboot.css"
 import "./index.css"
 import App from "./App"
 //import registerServiceWorker from './registerServiceWorker';
