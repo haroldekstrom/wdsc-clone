@@ -19,7 +19,8 @@ const NavItemButton = styled.button`
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-left: ${props => (props.active ? "6px solid rgb(0, 120, 215)" : "6px solid transparent")};
+  border-left: ${props =>
+    props.active ? "6px solid rgb(116, 184, 252)" : "6px solid transparent"};
   border-radius: 0;
   display: flex;
   align-items: center;
