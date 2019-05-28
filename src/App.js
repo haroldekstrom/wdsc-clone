@@ -522,7 +522,7 @@ class AppTab extends Component {
               <input type="radio" /> Off
             </label>
           </VerticalRadioGroup>
-          <a href="#">Privacy statement</a>
+          <a href="#/">Privacy statement</a>
         </div>
 
         <div>
@@ -542,7 +542,7 @@ class AppTab extends Component {
               <input type="radio" /> Off
             </label>
           </VerticalRadioGroup>
-          <a href="#">Privacy statement</a>
+          <a href="#/">Privacy statement</a>
         </div>
 
         <div>
@@ -562,7 +562,7 @@ class AppTab extends Component {
               <input type="radio" /> Off
             </label>
           </VerticalRadioGroup>
-          <a href="#">Privacy statement</a>
+          <a href="#/">Privacy statement</a>
           <br />
           <label>
             <Toggle icons={false} />
@@ -615,7 +615,7 @@ class FamilyTab extends Component {
             <div>Choose what they see and purchase for their devices.</div>
           </div>
 
-          <a href="#">View family settings</a>
+          <a href="#/">View family settings</a>
         </div>
 
         <div>
@@ -627,7 +627,7 @@ class FamilyTab extends Component {
             <div>Make sure they're up-to-date and see device security and health status.</div>
           </div>
 
-          <a href="#">View devices</a>
+          <a href="#/">View devices</a>
         </div>
 
         <div>Not all features are available in all markets.</div>
