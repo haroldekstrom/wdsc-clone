@@ -624,7 +624,7 @@ class FamilyTab extends Component {
           <div>
             <div />
             <div>Check the health and safety of your family's devices.</div>
-            <div>Make sure they're up-to-date and see device security and halth status.</div>
+            <div>Make sure they're up-to-date and see device security and health status.</div>
           </div>
 
           <a href="#">View devices</a>
