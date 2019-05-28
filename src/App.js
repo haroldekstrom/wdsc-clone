@@ -255,8 +255,10 @@ class HomeTab extends Component {
         <HomeTabBanner>
           <div>Your device is being protected.</div>
           <div>
-            Last threat scan: 9/13/2017<br />
-            Last threat definition update: 9/13/2017<br />
+            Last threat scan: 9/13/2017
+            <br />
+            Last threat definition update: 9/13/2017
+            <br />
             Last health scan: 9/14/2017
           </div>
         </HomeTabBanner>
@@ -280,14 +282,18 @@ class HomeTab extends Component {
             <PanelItemIcon className="fa fa-window-maximize fa-4x" />
             <PanelItemTitle>App & browser control</PanelItemTitle>
             <PanelItemSubTitle>
-              You're using<br />recommended settings.
+              You're using
+              <br />
+              recommended settings.
             </PanelItemSubTitle>
           </HomeTabPanelButton>
           <HomeTabPanelButton>
             <PanelItemIcon className="fa fa-child fa-4x" />
             <PanelItemTitle>Family options</PanelItemTitle>
             <PanelItemSubTitle>
-              Manage how your family<br />uses their devices.
+              Manage how your family
+              <br />
+              uses their devices.
             </PanelItemSubTitle>
           </HomeTabPanelButton>
         </HomeTabPanel>
@@ -305,10 +311,7 @@ class ProtectionTab extends Component {
             <img src={shieldIcon} height="32" width="32" alt="" />
             <div>Virus & threat protection</div>
           </TabTitle>
-          <TabSubTitle>
-            View threat history, scan for viruses and other threats, specify protection settings,
-            and get protection udpates.
-          </TabSubTitle>
+          <TabSubTitle>Protection for your device against threats.</TabSubTitle>
         </TabHeader>
         <div>
           <div />
