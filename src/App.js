@@ -120,6 +120,11 @@ class NavBar extends Component {
         icon: shieldIcon,
         title: "Virus & threat protection",
       },
+      {
+        id: "account",
+        icon: shieldIcon,
+        title: "Account protection",
+      },
       { id: "health", icon: healthIcon, title: "Device performance & health" },
       {
         id: "firewall",
@@ -343,6 +348,23 @@ class ProtectionTab extends Component {
           </div>
           <div>Protection definitions are up to date.</div>
         </div>
+      </Tab>
+    )
+  }
+}
+
+class AccountTab extends Component {
+  render() {
+    return (
+      <Tab className="tab accounttab">
+        <TabHeader>
+          <TabTitle>
+            <img src={shieldIcon} height="32" width="32" alt="" />
+            <div>Account protection</div>
+          </TabTitle>
+          <TabSubTitle>Security for your account and sign-in.</TabSubTitle>
+        </TabHeader>
+        <div />
       </Tab>
     )
   }
@@ -764,6 +786,9 @@ class App extends Component {
         break
       case "protection":
         tab = <ProtectionTab />
+        break
+      case "account":
+        tab = <AccountTab />
         break
       case "health":
         tab = <HealthTab />
