@@ -307,10 +307,7 @@ class ProtectionTab extends Component {
             <img src={shieldIcon} height="32" width="32" alt="" />
             <div>Virus & threat protection</div>
           </TabTitle>
-          <TabSubTitle>
-            View threat history, scan for viruses and other threats, specify protection settings,
-            and get protection udpates.
-          </TabSubTitle>
+          <TabSubTitle>Protection for your device against threats.</TabSubTitle>
         </TabHeader>
         <div>
           <div />
