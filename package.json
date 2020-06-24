@@ -5,12 +5,14 @@
   "dependencies": {
     "bootstrap": "^4.1.0",
     "font-awesome": "^4.7.0",
+    "prop-types": "^15.7.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-scripts": "3.0.1",
+    "react-is": "^16.13.1",
+    "react-scripts": "3.4.1",
     "react-toggle": "^4.0.2",
-    "react-transition-group": "^2.2.0",
-    "styled-components": "^4.0.0"
+    "react-transition-group": "^4.4.0",
+    "styled-components": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
