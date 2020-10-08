@@ -9,10 +9,10 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-is": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "3.4.3",
     "react-toggle": "^4.0.2",
     "react-transition-group": "^4.4.0",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
