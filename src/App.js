@@ -326,7 +326,7 @@ class ProtectionTab extends Component {
             <div>Threats found</div>
           </div>
           <div>
-            <div>81994</div>
+            <div>81,994</div>
             <div>Files scanned</div>
           </div>
           <button>Quick scan</button>
